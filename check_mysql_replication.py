@@ -99,7 +99,6 @@ log.setLevel(logging.DEBUG)
 
 log.debug("Master: %s %s %s" % (master_ip,master_user,master_passwd))
 log.debug("Slave: %s %s %s" % (slave_ip,slave_user,slave_passwd))
-log.debug("Notify: %s" % (emails))
 
 def connect_mysql(ip,user,password,database):
     try:
@@ -143,7 +142,7 @@ def verify_slave_stats(conn):
         
         return status
     except Exception as error:
-        raise Exception('Function verify_slave_stats\nMensagem de erro:\n'+str(error)))
+        raise Exception('Function verify_slave_stats\nMensagem de erro:\n'+str(error))
 
 def verify_status_master(conn):
     try:
@@ -153,9 +152,8 @@ def verify_status_master(conn):
             raise Exception('A verificação de status do Master retornou vazia.\n Verifique o localmento o banco de dados')
       
         status ={
-            'file': master_row['File']
-            'position': master_row['Position']
-            
+            'file': master_row['File'],
+            'position': master_row['Position'],            
         }
         return status
     except mdb.Error as e:
@@ -178,3 +176,7 @@ def main():
     except Exception as error:
         notify_byemail('Replicação com Problema',str(error))            
 
+
+
+if __name__ == '__main__':
+    main()
