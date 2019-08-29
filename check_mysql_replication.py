@@ -117,7 +117,7 @@ def mysql_query(conn, query):
         raise Exception("Execute Mysql Query\n"+str(e))
 
 def verify_slave_stats(conn):
-	try:
+    try:
         result = mysql_query(conn, 'SHOW SLAVE STATUS')
         slave_row = result.fetchone()
         if slave_row is None:
